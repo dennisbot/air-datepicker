@@ -15,6 +15,7 @@
             inline: false,
             language: 'ru',
             startDate: new Date(),
+            highlightedDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
             dateFormat: '',
@@ -112,6 +113,10 @@
 
         if (!this.opts.startDate) {
             this.opts.startDate = new Date();
+        }
+
+        if (!this.opts.highlightedDate) {
+            this.opts.highlightedDate = new Date();
         }
 
         if (this.el.nodeName == 'INPUT') {

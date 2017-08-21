@@ -15,6 +15,7 @@
             inline: false,
             language: 'ru',
             startDate: new Date(),
+            highlightedDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
             dateFormat: '',
@@ -112,6 +113,10 @@
 
         if (!this.opts.startDate) {
             this.opts.startDate = new Date();
+        }
+
+        if (!this.opts.highlightedDate) {
+            this.opts.highlightedDate = new Date();
         }
 
         if (this.el.nodeName == 'INPUT') {
@@ -1554,7 +1559,6 @@
 
         _getCellContents: function (date, type) {
             var classes = "datepicker--cell datepicker--cell-" + type,
-                currentDate = new Date(),
                 parent = this.d,
                 minRange = dp.resetTime(parent.minRange),
                 maxRange = dp.resetTime(parent.maxRange),
@@ -1562,6 +1566,8 @@
                 d = dp.getParsedDate(date),
                 render = {},
                 html = d.date;
+
+            var highlightedDate = opts.highlightedDate;
 
             switch (type) {
                 case 'day':
@@ -1623,7 +1629,7 @@
             }
 
 
-            if (dp.isSame(currentDate, date, type)) classes += ' -current-';
+            if (dp.isSame(highlightedDate, date, type)) classes += ' -current-';
             if (parent.focused && dp.isSame(date, parent.focused, type)) classes += ' -focus-';
             if (parent._isSelected(date, type)) classes += ' -selected-';
             if (!parent._isInRange(date, type) || render.disabled) classes += ' -disabled-';
@@ -2201,7 +2207,7 @@
         _onChangeRange: function (e) {
             var $target = $(e.target),
                 name = $target.attr('name');
-
+            
             this.d.timepickerIsActive = true;
 
             this[name] = $target.val();
