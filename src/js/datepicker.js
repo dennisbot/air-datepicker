@@ -15,7 +15,6 @@
             inline: false,
             language: 'ru',
             startDate: new Date(),
-            highlightedDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
             dateFormat: '',
@@ -53,6 +52,7 @@
             autoClose: false,
 
             // custom options
+            highlightedDate: new Date(),
             resetBeforeShow: false,
 
             // navigation
