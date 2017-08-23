@@ -15,7 +15,6 @@
             inline: false,
             language: 'ru',
             startDate: new Date(),
-            highlightedDate: new Date(),
             firstDay: '',
             weekends: [6, 0],
             dateFormat: '',
@@ -51,6 +50,10 @@
 
             showEvent: 'focus',
             autoClose: false,
+
+            // custom options
+            highlightedDate: new Date(),
+            resetBeforeShow: false,
 
             // navigation
             monthsField: 'monthsShort',
@@ -633,6 +636,10 @@
                 }
             }
 
+            if (this.opts.startDate) {
+              this.currentDate = this.opts.startDate;
+            }
+
             if (this.opts.classes) {
                 this.$datepicker.addClass(this.opts.classes)
             }
@@ -819,6 +826,15 @@
             this.setPosition(this.opts.position);
             this.$datepicker.addClass('active');
             this.visible = true;
+
+            if (this.opts.resetBeforeShow) {
+                // Update currentDate to the defined in startDate
+                this.currentDate = this.opts.startDate;
+
+                // Re-render the navigation bar and the calendar
+                this.nav._render();
+                this.views[this.currentView]._render();
+            }
 
             if (onShow) {
                 this._bindVisionEvents(onShow)
